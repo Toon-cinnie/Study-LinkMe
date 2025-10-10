@@ -1,205 +1,155 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  GraduationCap, 
-  Briefcase, 
-  Users, 
-  BookOpen, 
-  TrendingUp,
-  CheckCircle,
-  ArrowRight
-} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { BookOpen, Users, DollarSign, Award, Sparkles, TrendingUp, MessageCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import studylinkLogo from "@/assets/studylink-logo.png";
 
 const Index = () => {
   const navigate = useNavigate();
 
-  const features = [
-    {
-      icon: Briefcase,
-      title: "Freelancing Marketplace",
-      description: "Post tasks, bid on projects, and earn money helping fellow students with assignments and tutoring.",
-    },
-    {
-      icon: Users,
-      title: "Research Collaboration",
-      description: "Upload your research, find similar studies, and connect with peers working on related topics.",
-    },
-    {
-      icon: BookOpen,
-      title: "Real-time Communication",
-      description: "Chat with collaborators, share files, and get AI-powered summaries of your conversations.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Earn & Grow",
-      description: "Track your earnings, build your portfolio, and gain recognition in the academic community.",
-    },
-  ];
-
-  const benefits = [
-    "Secure escrow payment system",
-    "AI-powered research matching",
-    "Community forums and leaderboards",
-    "University email verification",
-    "24/7 chat support",
-    "Profile and portfolio showcase",
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <header className="border-b bg-card shadow-soft">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <GraduationCap className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-bold gradient-primary bg-clip-text text-transparent">
-              StudyLink
-            </h1>
+      <div className="gradient-hero py-24 px-4 relative overflow-hidden">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+        
+        <div className="container mx-auto text-center relative z-10">
+          <div className="flex justify-center mb-8 animate-slide-up">
+            <img src={studylinkLogo} alt="StudyLink" className="w-32 h-32 drop-shadow-2xl" />
           </div>
-          <Button onClick={() => navigate("/auth")} variant="outline">
-            Sign In
-          </Button>
-        </div>
-      </header>
-
-      {/* Hero Content */}
-      <section className="gradient-hero py-20 px-4">
-        <div className="container mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-            <span className="text-sm font-medium text-primary">Learn • Earn • Collaborate</span>
-          </div>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Your Academic
-            <span className="gradient-primary bg-clip-text text-transparent"> Collaboration Hub</span>
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Connect with fellow students, monetize your skills, collaborate on research, 
-            and grow your academic network — all in one platform.
+          <h1 className="text-6xl md:text-7xl font-extrabold mb-6 animate-fade-in bg-gradient-primary bg-clip-text text-transparent">
+            Learn, Earn, Collaborate
+          </h1>
+          <p className="text-xl md:text-2xl text-foreground/80 mb-10 max-w-2xl mx-auto animate-slide-up font-medium">
+            Join thousands of students monetizing their skills and collaborating on groundbreaking research
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="text-lg px-8 shadow-primary hover:shadow-large transition-smooth"
-              onClick={() => navigate("/auth")}
-            >
+          <div className="flex gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <Button size="lg" className="shadow-primary hover:shadow-glow transition-all hover:scale-105" onClick={() => navigate("/auth")}>
+              <Sparkles className="mr-2 h-5 w-5" />
               Get Started Free
-              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="text-lg px-8 shadow-soft hover:shadow-medium transition-smooth"
-              onClick={() => navigate("/tasks")}
-            >
-              Browse Tasks
+            <Button size="lg" variant="outline" className="border-2 hover:border-primary hover:shadow-medium transition-all hover:scale-105" onClick={() => navigate("/tasks")}>
+              Browse Opportunities
             </Button>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Features Grid */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
+      {/* Features Section */}
+      <div className="py-24 px-4 bg-gradient-card">
+        <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">
-              Everything You Need to Succeed
-            </h3>
-            <p className="text-xl text-muted-foreground">
-              A comprehensive platform built for student collaboration
+            <h2 className="text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+              Why Choose StudyLink?
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Everything you need to succeed academically and financially
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <Card key={index} className="shadow-soft hover:shadow-medium transition-smooth">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
-                    <CardDescription className="text-base">
-                      {feature.description}
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-20 px-4 bg-muted/50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl md:text-4xl font-bold mb-6">
-                Why Choose StudyLink?
-              </h3>
-              <p className="text-lg text-muted-foreground mb-8">
-                We provide a secure, feature-rich environment designed specifically 
-                for university students to thrive academically and financially.
-              </p>
-              <div className="space-y-4">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-base">{benefit}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <Card className="shadow-large">
-              <CardHeader>
-                <CardTitle>Ready to Get Started?</CardTitle>
-                <CardDescription>
-                  Join thousands of students already collaborating and earning
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
-                      1
-                    </div>
-                    <span>Create your free account</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
-                      2
-                    </div>
-                    <span>Complete your profile</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
-                      3
-                    </div>
-                    <span>Start collaborating and earning</span>
-                  </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="shadow-medium hover:shadow-large transition-bounce hover:-translate-y-2 gradient-card border-0">
+              <CardContent className="pt-8 text-center">
+                <div className="inline-flex p-4 rounded-2xl bg-primary/10 mb-6">
+                  <DollarSign className="h-10 w-10 text-primary" />
                 </div>
-                <Button 
-                  className="w-full shadow-primary"
-                  size="lg"
-                  onClick={() => navigate("/auth")}
-                >
-                  Create Account Now
-                </Button>
+                <h3 className="text-2xl font-bold mb-3">Earn Money</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Turn your expertise into income by helping fellow students
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-medium hover:shadow-large transition-bounce hover:-translate-y-2 gradient-card border-0">
+              <CardContent className="pt-8 text-center">
+                <div className="inline-flex p-4 rounded-2xl bg-secondary/10 mb-6">
+                  <BookOpen className="h-10 w-10 text-secondary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3">Get Expert Help</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Access skilled peers for assignments, tutoring, and projects
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-medium hover:shadow-large transition-bounce hover:-translate-y-2 gradient-card border-0">
+              <CardContent className="pt-8 text-center">
+                <div className="inline-flex p-4 rounded-2xl bg-accent/10 mb-6">
+                  <Users className="h-10 w-10 text-accent" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3">Collaborate</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Team up with researchers sharing your academic interests
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-medium hover:shadow-large transition-bounce hover:-translate-y-2 gradient-card border-0">
+              <CardContent className="pt-8 text-center">
+                <div className="inline-flex p-4 rounded-2xl bg-primary/10 mb-6">
+                  <Award className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3">Build Portfolio</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Showcase achievements and grow your academic reputation
+                </p>
               </CardContent>
             </Card>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Footer */}
-      <footer className="border-t py-8 px-4">
-        <div className="container mx-auto text-center text-muted-foreground">
-          <p>&copy; 2025 StudyLink. All rights reserved.</p>
+      {/* Stats Section */}
+      <div className="py-20 px-4 gradient-hero">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-3 gap-12 text-center">
+            <div className="animate-slide-up">
+              <div className="flex justify-center mb-4">
+                <TrendingUp className="h-12 w-12 text-primary" />
+              </div>
+              <h3 className="text-4xl font-bold mb-2">10k+</h3>
+              <p className="text-muted-foreground text-lg">Active Students</p>
+            </div>
+            <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+              <div className="flex justify-center mb-4">
+                <MessageCircle className="h-12 w-12 text-secondary" />
+              </div>
+              <h3 className="text-4xl font-bold mb-2">50k+</h3>
+              <p className="text-muted-foreground text-lg">Tasks Completed</p>
+            </div>
+            <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              <div className="flex justify-center mb-4">
+                <Sparkles className="h-12 w-12 text-accent" />
+              </div>
+              <h3 className="text-4xl font-bold mb-2">500+</h3>
+              <p className="text-muted-foreground text-lg">Research Collaborations</p>
+            </div>
+          </div>
         </div>
-      </footer>
+      </div>
+
+      {/* CTA Section */}
+      <div className="py-24 px-4">
+        <div className="container mx-auto max-w-4xl text-center">
+          <Card className="shadow-large gradient-card border-0 p-12 animate-slide-up">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+              Ready to Transform Your Academic Journey?
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Join our thriving community today and unlock your potential
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button size="lg" className="shadow-primary hover:shadow-glow transition-all text-lg px-8" onClick={() => navigate("/auth")}>
+                <Sparkles className="mr-2 h-5 w-5" />
+                Start for Free
+              </Button>
+              <Button size="lg" variant="outline" className="border-2 text-lg px-8" onClick={() => navigate("/research")}>
+                Explore Research
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };

@@ -104,6 +104,98 @@ export type Database = {
         }
         Relationships: []
       }
+      research: {
+        Row: {
+          abstract: string
+          created_at: string | null
+          document_url: string | null
+          field: string
+          id: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          abstract: string
+          created_at?: string | null
+          document_url?: string | null
+          field: string
+          id?: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          abstract?: string
+          created_at?: string | null
+          document_url?: string | null
+          field?: string
+          id?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "research_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      research_collaborations: {
+        Row: {
+          created_at: string | null
+          id: string
+          message: string | null
+          requester_id: string
+          research_id: string
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          message?: string | null
+          requester_id: string
+          research_id: string
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          message?: string | null
+          requester_id?: string
+          research_id?: string
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "research_collaborations_requester_id_fkey"
+            columns: ["requester_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "research_collaborations_research_id_fkey"
+            columns: ["research_id"]
+            isOneToOne: false
+            referencedRelation: "research"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       skills: {
         Row: {
           category: string | null

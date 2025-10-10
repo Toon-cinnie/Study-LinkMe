@@ -7,8 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { GraduationCap } from "lucide-react";
 import { z } from "zod";
+import studylinkLogo from "@/assets/studylink-logo.png";
+import { Sparkles } from "lucide-react";
 
 const signUpSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -140,22 +141,25 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center gradient-hero px-4">
-      <Card className="w-full max-w-md shadow-large">
-        <CardHeader className="space-y-1 text-center">
+    <div className="min-h-screen flex items-center justify-center p-4 gradient-hero relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+      
+      <Card className="w-full max-w-md shadow-large gradient-card border-0 animate-slide-up relative z-10">
+        <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-primary/10 rounded-full">
-              <GraduationCap className="h-8 w-8 text-primary" />
-            </div>
+            <img src={studylinkLogo} alt="StudyLink" className="w-20 h-20 drop-shadow-xl" />
           </div>
-          <CardTitle className="text-2xl font-bold">Welcome to StudyLink</CardTitle>
-          <CardDescription>
-            Learn, Earn, and Collaborate with fellow students
+          <CardTitle className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            Welcome to StudyLink
+          </CardTitle>
+          <CardDescription className="text-base">
+            Join the academic revolution today
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="signin">Sign In</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
@@ -183,7 +187,7 @@ const Auth = () => {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full shadow-primary hover:shadow-glow transition-all" disabled={loading}>
                   {loading ? "Signing In..." : "Sign In"}
                 </Button>
               </form>
@@ -224,7 +228,8 @@ const Auth = () => {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full shadow-primary hover:shadow-glow transition-all" disabled={loading}>
+                  <Sparkles className="mr-2 h-4 w-4" />
                   {loading ? "Creating Account..." : "Create Account"}
                 </Button>
               </form>
