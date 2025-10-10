@@ -90,9 +90,9 @@ const Index = () => {
               size="lg" 
               variant="outline" 
               className="text-lg px-8 shadow-soft hover:shadow-medium transition-smooth"
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate("/tasks")}
             >
-              View Dashboard
+              Browse Tasks
             </Button>
           </div>
         </div>
