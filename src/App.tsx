@@ -12,6 +12,7 @@ import TaskDetail from "./pages/TaskDetail";
 import Research from "./pages/Research";
 import NewResearch from "./pages/NewResearch";
 import ResearchDetail from "./pages/ResearchDetail";
+import Chats from "./pages/Chats";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/research" element={<Research />} />
           <Route path="/research/new" element={<NewResearch />} />
           <Route path="/research/:id" element={<ResearchDetail />} />
+          <Route path="/chats" element={<Chats />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

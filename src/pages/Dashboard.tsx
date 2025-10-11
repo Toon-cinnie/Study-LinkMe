@@ -11,7 +11,8 @@ import {
   BookOpen, 
   TrendingUp,
   LogOut,
-  GraduationCap
+  GraduationCap,
+  MessageCircle
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -188,18 +189,37 @@ const Dashboard = () => {
               Get started with StudyLink's core features
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Button className="h-20 flex-col gap-2 shadow-soft hover:shadow-primary transition-smooth">
+          <CardContent className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <Button 
+              className="h-20 flex-col gap-2 shadow-soft hover:shadow-primary transition-smooth"
+              onClick={() => navigate("/tasks/new")}
+            >
               <Briefcase className="h-6 w-6" />
               <span>Post a Task</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth">
+            <Button 
+              variant="outline" 
+              className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth"
+              onClick={() => navigate("/research")}
+            >
               <Users className="h-6 w-6" />
               <span>Find Collaborators</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth">
+            <Button 
+              variant="outline" 
+              className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth"
+              onClick={() => navigate("/research/new")}
+            >
               <BookOpen className="h-6 w-6" />
               <span>Upload Research</span>
+            </Button>
+            <Button 
+              variant="outline" 
+              className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth"
+              onClick={() => navigate("/chats")}
+            >
+              <MessageCircle className="h-6 w-6" />
+              <span>Messages</span>
             </Button>
           </CardContent>
         </Card>
