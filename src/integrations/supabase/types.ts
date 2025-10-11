@@ -182,6 +182,47 @@ export type Database = {
           },
         ]
       }
+      portfolio_items: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          file_url: string | null
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          file_url?: string | null
+          id?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          file_url?: string | null
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "portfolio_items_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -189,11 +230,15 @@ export type Database = {
           created_at: string | null
           email: string
           full_name: string | null
+          github: string | null
           id: string
           institution: string | null
+          linkedin: string | null
           major: string | null
+          twitter: string | null
           updated_at: string | null
           verified: boolean | null
+          website: string | null
           year_of_study: number | null
         }
         Insert: {
@@ -202,11 +247,15 @@ export type Database = {
           created_at?: string | null
           email: string
           full_name?: string | null
+          github?: string | null
           id: string
           institution?: string | null
+          linkedin?: string | null
           major?: string | null
+          twitter?: string | null
           updated_at?: string | null
           verified?: boolean | null
+          website?: string | null
           year_of_study?: number | null
         }
         Update: {
@@ -215,11 +264,15 @@ export type Database = {
           created_at?: string | null
           email?: string
           full_name?: string | null
+          github?: string | null
           id?: string
           institution?: string | null
+          linkedin?: string | null
           major?: string | null
+          twitter?: string | null
           updated_at?: string | null
           verified?: boolean | null
+          website?: string | null
           year_of_study?: number | null
         }
         Relationships: []
@@ -312,6 +365,61 @@ export type Database = {
             columns: ["research_id"]
             isOneToOne: false
             referencedRelation: "research"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          rating: number
+          reviewee_id: string
+          reviewer_id: string
+          task_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating: number
+          reviewee_id: string
+          reviewer_id: string
+          task_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          rating?: number
+          reviewee_id?: string
+          reviewer_id?: string
+          task_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_reviewee_id_fkey"
+            columns: ["reviewee_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
             referencedColumns: ["id"]
           },
         ]

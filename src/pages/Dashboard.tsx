@@ -12,7 +12,8 @@ import {
   TrendingUp,
   LogOut,
   GraduationCap,
-  MessageCircle
+  MessageCircle,
+  User as UserIcon
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -107,10 +108,16 @@ const Dashboard = () => {
               StudyLink
             </h1>
           </div>
-          <Button variant="outline" onClick={handleSignOut}>
-            <LogOut className="h-4 w-4 mr-2" />
-            Sign Out
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" onClick={() => navigate("/profile")}>
+              <UserIcon className="h-4 w-4 mr-2" />
+              Profile
+            </Button>
+            <Button variant="outline" onClick={handleSignOut}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
       </header>
 
