@@ -157,7 +157,7 @@ export default function Tasks() {
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-1 text-primary">
                       <DollarSign className="h-4 w-4" />
-                      <span className="font-semibold">₦{task.budget.toLocaleString()}</span>
+                      <span className="font-semibold">KES {task.budget.toLocaleString()}</span>
                     </div>
                     <div className="flex items-center gap-1 text-muted-foreground">
                       <Calendar className="h-4 w-4" />

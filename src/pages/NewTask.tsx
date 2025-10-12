@@ -110,7 +110,7 @@ export default function NewTask() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="budget">Budget (₦)</Label>
+                  <Label htmlFor="budget">Budget (KES)</Label>
                   <Input
                     id="budget"
                     type="number"

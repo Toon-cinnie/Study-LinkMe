@@ -102,8 +102,12 @@ const Dashboard = () => {
       {/* Header */}
       <header className="border-b bg-card shadow-soft">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <GraduationCap className="h-8 w-8 text-primary" />
+          <div className="flex items-center gap-3">
+            <img 
+              src="/src/assets/studylink-logo.png" 
+              alt="StudyLink" 
+              className="h-10 w-10 object-contain"
+            />
             <h1 className="text-2xl font-bold gradient-primary bg-clip-text text-transparent">
               StudyLink
             </h1>
@@ -113,7 +117,11 @@ const Dashboard = () => {
               <UserIcon className="h-4 w-4 mr-2" />
               Profile
             </Button>
-            <Button variant="outline" onClick={handleSignOut}>
+            <Button 
+              variant="ghost" 
+              onClick={handleSignOut}
+              className="text-destructive hover:text-destructive hover:bg-destructive/10"
+            >
               <LogOut className="h-4 w-4 mr-2" />
               Sign Out
             </Button>
@@ -180,7 +188,7 @@ const Dashboard = () => {
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$0</div>
+              <div className="text-2xl font-bold">KES 0</div>
               <p className="text-xs text-muted-foreground">
                 Start earning today
               </p>
@@ -189,47 +197,104 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions */}
-        <Card className="shadow-medium">
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>
-              Get started with StudyLink's core features
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Button 
-              className="h-20 flex-col gap-2 shadow-soft hover:shadow-primary transition-smooth"
-              onClick={() => navigate("/tasks/new")}
-            >
-              <Briefcase className="h-6 w-6" />
-              <span>Post a Task</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth"
-              onClick={() => navigate("/research")}
-            >
-              <Users className="h-6 w-6" />
-              <span>Find Collaborators</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth"
-              onClick={() => navigate("/research/new")}
-            >
-              <BookOpen className="h-6 w-6" />
-              <span>Upload Research</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="h-20 flex-col gap-2 shadow-soft hover:shadow-medium transition-smooth"
-              onClick={() => navigate("/chats")}
-            >
-              <MessageCircle className="h-6 w-6" />
-              <span>Messages</span>
-            </Button>
-          </CardContent>
-        </Card>
+        <div className="grid gap-6 md:grid-cols-2 mb-8">
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle>Quick Actions</CardTitle>
+              <CardDescription>Post tasks and share research</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+              <Button 
+                className="h-16 flex items-center justify-start gap-4 shadow-soft hover:shadow-primary transition-smooth"
+                onClick={() => navigate("/tasks/new")}
+              >
+                <Briefcase className="h-6 w-6" />
+                <div className="text-left">
+                  <div className="font-semibold">Post a Task</div>
+                  <div className="text-xs opacity-90">Get help with assignments</div>
+                </div>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="h-16 flex items-center justify-start gap-4 shadow-soft hover:shadow-medium transition-smooth"
+                onClick={() => navigate("/research/new")}
+              >
+                <BookOpen className="h-6 w-6" />
+                <div className="text-left">
+                  <div className="font-semibold">Upload Research</div>
+                  <div className="text-xs opacity-90">Share your work</div>
+                </div>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-medium">
+            <CardHeader>
+              <CardTitle>Explore</CardTitle>
+              <CardDescription>Connect and collaborate</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+              <Button 
+                variant="outline" 
+                className="h-16 flex items-center justify-start gap-4 shadow-soft hover:shadow-medium transition-smooth"
+                onClick={() => navigate("/tasks")}
+              >
+                <Briefcase className="h-6 w-6" />
+                <div className="text-left">
+                  <div className="font-semibold">Browse Tasks</div>
+                  <div className="text-xs opacity-90">Find freelance work</div>
+                </div>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="h-16 flex items-center justify-start gap-4 shadow-soft hover:shadow-medium transition-smooth"
+                onClick={() => navigate("/research")}
+              >
+                <Users className="h-6 w-6" />
+                <div className="text-left">
+                  <div className="font-semibold">Find Collaborators</div>
+                  <div className="text-xs opacity-90">Connect with researchers</div>
+                </div>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Features */}
+        <div className="grid gap-6 md:grid-cols-3">
+          <Card 
+            className="shadow-soft hover:shadow-medium transition-smooth cursor-pointer"
+            onClick={() => navigate("/chats")}
+          >
+            <CardContent className="pt-6">
+              <MessageCircle className="h-12 w-12 text-primary mb-4" />
+              <h3 className="font-semibold mb-2">Messages</h3>
+              <p className="text-sm text-muted-foreground">Chat with collaborators and clients</p>
+            </CardContent>
+          </Card>
+
+          <Card 
+            className="shadow-soft hover:shadow-medium transition-smooth cursor-pointer"
+            onClick={() => navigate("/community")}
+          >
+            <CardContent className="pt-6">
+              <Users className="h-12 w-12 text-primary mb-4" />
+              <h3 className="font-semibold mb-2">Community Hub</h3>
+              <p className="text-sm text-muted-foreground">Join discussions and study groups</p>
+            </CardContent>
+          </Card>
+
+          <Card 
+            className="shadow-soft hover:shadow-medium transition-smooth cursor-pointer"
+            onClick={() => navigate("/profile")}
+          >
+            <CardContent className="pt-6">
+              <UserIcon className="h-12 w-12 text-primary mb-4" />
+              <h3 className="font-semibold mb-2">Your Profile</h3>
+              <p className="text-sm text-muted-foreground">Manage your portfolio and skills</p>
+            </CardContent>
+          </Card>
+        </div>
       </main>
     </div>
   );

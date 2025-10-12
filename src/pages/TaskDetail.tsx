@@ -237,7 +237,7 @@ export default function TaskDetail() {
                     <DollarSign className="h-5 w-5" />
                     <div>
                       <p className="text-sm text-muted-foreground">Budget</p>
-                      <p className="text-xl font-bold">₦{task.budget.toLocaleString()}</p>
+                      <p className="text-xl font-bold">KES {task.budget.toLocaleString()}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -264,7 +264,7 @@ export default function TaskDetail() {
                 <CardContent>
                   <form onSubmit={handleSubmitBid} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="bidAmount">Bid Amount (₦)</Label>
+                      <Label htmlFor="bidAmount">Bid Amount (KES)</Label>
                       <Input
                         id="bidAmount"
                         type="number"
@@ -321,7 +321,7 @@ export default function TaskDetail() {
                               </p>
                             </div>
                             <Badge variant={bid.status === "accepted" ? "default" : "outline"}>
-                              ₦{bid.amount.toLocaleString()}
+                              KES {bid.amount.toLocaleString()}
                             </Badge>
                           </div>
                           <p className="text-sm text-muted-foreground mb-3">

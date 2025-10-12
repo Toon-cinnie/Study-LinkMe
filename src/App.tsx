@@ -14,6 +14,8 @@ import NewResearch from "./pages/NewResearch";
 import ResearchDetail from "./pages/ResearchDetail";
 import Chats from "./pages/Chats";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import Community from "./pages/Community";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,7 +38,9 @@ const App = () => (
           <Route path="/research/:id" element={<ResearchDetail />} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/community" element={<Community />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
