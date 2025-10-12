@@ -102,7 +102,7 @@ export default function EditProfile() {
         description: "Profile updated successfully!",
       });
 
-      navigate("/profile");
+      navigate("/dashboard");
     } catch (error: any) {
       toast({
         title: "Error",
@@ -120,7 +120,7 @@ export default function EditProfile() {
         <div className="flex items-center gap-4 mb-8">
           <Button
             variant="ghost"
-            onClick={() => navigate("/profile")}
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>

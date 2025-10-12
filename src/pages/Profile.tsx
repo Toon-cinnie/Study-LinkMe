@@ -123,7 +123,7 @@ export default function Profile() {
         <div className="flex items-center gap-4 mb-8">
           <Button
             variant="ghost"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/dashboard")}
             className="text-foreground hover:text-primary"
           >
             <ArrowLeft className="w-5 h-5" />

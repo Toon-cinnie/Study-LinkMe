@@ -49,22 +49,19 @@ export default function Chats() {
 
     const loadConversations = async () => {
       const { data, error } = await supabase
-        .from("conversation_participants")
+        .from("conversations")
         .select(`
-          conversation_id,
-          conversations!inner(
-            id,
-            updated_at,
-            task_id,
-            research_id,
-            conversation_participants!inner(
-              user_id,
-              profiles!inner(full_name)
-            ),
-            messages(content, created_at)
-          )
+          id,
+          updated_at,
+          task_id,
+          research_id,
+          conversation_participants!inner(
+            user_id,
+            profiles!inner(full_name)
+          ),
+          messages(content, created_at)
         `)
-        .eq("user_id", currentUser.id)
+        .eq("conversation_participants.user_id", currentUser.id)
         .order("updated_at", { ascending: false });
 
       if (error) {
@@ -74,22 +71,15 @@ export default function Chats() {
           variant: "destructive",
         });
       } else {
-        const uniqueConvos = Array.from(
-          new Map(
-            (data || []).map((item: any) => [
-              item.conversations.id,
-              {
-                id: item.conversations.id,
-                updated_at: item.conversations.updated_at,
-                task_id: item.conversations.task_id,
-                research_id: item.conversations.research_id,
-                participants: item.conversations.conversation_participants,
-                messages: item.conversations.messages,
-              },
-            ])
-          ).values()
-        );
-        setConversations(uniqueConvos);
+        const normalized = (data || []).map((item: any) => ({
+          id: item.id,
+          updated_at: item.updated_at,
+          task_id: item.task_id,
+          research_id: item.research_id,
+          participants: item.conversation_participants,
+          messages: item.messages || [],
+        }));
+        setConversations(normalized);
       }
     };
 
