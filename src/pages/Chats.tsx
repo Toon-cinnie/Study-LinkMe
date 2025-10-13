@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { MessageCircle, ArrowLeft } from "lucide-react";
 import Chat from "@/components/Chat";
+import NewChatDialog from "@/components/NewChatDialog";
 
 interface Conversation {
   id: string;
@@ -31,6 +32,37 @@ export default function Chats() {
   const [currentUser, setCurrentUser] = useState<any>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isNewOpen, setIsNewOpen] = useState(false);
+
+  const startChat = async (otherUserId: string) => {
+    if (!currentUser) return;
+    try {
+      const { data: conv, error: convError } = await supabase
+        .from("conversations")
+        .insert({})
+        .select("id")
+        .single();
+      if (convError) throw convError;
+
+      const convId = conv.id as string;
+
+      const { error: selfError } = await supabase
+        .from("conversation_participants")
+        .insert({ conversation_id: convId, user_id: currentUser.id });
+      if (selfError) throw selfError;
+
+      const { error: otherError } = await supabase
+        .from("conversation_participants")
+        .insert({ conversation_id: convId, user_id: otherUserId });
+      if (otherError) throw otherError;
+
+      setIsNewOpen(false);
+      setSelectedConversation(convId);
+      toast({ title: "Conversation created" });
+    } catch (e: any) {
+      toast({ title: "Failed to start chat", description: e.message, variant: "destructive" });
+    }
+  };
 
   useEffect(() => {
     const loadUser = async () => {
@@ -132,6 +164,14 @@ export default function Chats() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-slideUp">
             Messages
           </h1>
+          <div className="ml-auto">
+            <NewChatDialog
+              open={isNewOpen}
+              onOpenChange={setIsNewOpen}
+              currentUserId={currentUser?.id}
+              onStartChat={startChat}
+            />
+          </div>
         </div>
 
         <div className="grid gap-4">
@@ -142,6 +182,9 @@ export default function Chats() {
                 <p className="text-muted-foreground text-center">
                   No conversations yet. Start chatting by bidding on tasks or collaborating on research!
                 </p>
+                <div className="mt-4">
+                  <Button onClick={() => setIsNewOpen(true)}>Start a New Chat</Button>
+                </div>
               </CardContent>
             </Card>
           ) : (
