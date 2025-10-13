@@ -113,6 +113,10 @@ const Dashboard = () => {
             </h1>
           </div>
           <div className="flex items-center gap-2">
+            <Button variant="ghost" onClick={() => navigate("/chats")}>
+              <MessageCircle className="h-4 w-4 mr-2" />
+              Messages
+            </Button>
             <Button variant="ghost" onClick={() => navigate("/profile")}>
               <UserIcon className="h-4 w-4 mr-2" />
               Profile
