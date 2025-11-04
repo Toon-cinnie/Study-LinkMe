@@ -37,30 +37,31 @@ export default function Chats() {
   const startChat = async (otherUserId: string) => {
     if (!currentUser) return;
     try {
-      const { data: conv, error: convError } = await supabase
-        .from("conversations")
-        .insert({})
-        .select("id")
-        .single();
+      const convId = crypto.randomUUID();
+
+      // 1) Create conversation without returning the row to avoid SELECT RLS
+      const { error: convError } = await supabase
+        .from('conversations')
+        .insert([{ id: convId }]);
       if (convError) throw convError;
 
-      const convId = conv.id as string;
-
+      // 2) Ensure current user is a participant (works even if DB trigger also adds them)
       const { error: selfError } = await supabase
-        .from("conversation_participants")
+        .from('conversation_participants')
         .insert({ conversation_id: convId, user_id: currentUser.id });
-      if (selfError) throw selfError;
+      if (selfError && !String(selfError.message).toLowerCase().includes('duplicate')) throw selfError;
 
+      // 3) Add the other user
       const { error: otherError } = await supabase
-        .from("conversation_participants")
+        .from('conversation_participants')
         .insert({ conversation_id: convId, user_id: otherUserId });
       if (otherError) throw otherError;
 
       setIsNewOpen(false);
       setSelectedConversation(convId);
-      toast({ title: "Conversation created" });
+      toast({ title: 'Conversation created' });
     } catch (e: any) {
-      toast({ title: "Failed to start chat", description: e.message, variant: "destructive" });
+      toast({ title: 'Failed to start chat', description: e.message, variant: 'destructive' });
     }
   };
 
