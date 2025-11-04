@@ -111,7 +111,7 @@ const Community = () => {
         .select('id')
         .eq('group_id', groupId)
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
       if (existing) {
         toast({ title: "Already a member", description: "You're already part of this group!" });
@@ -119,30 +119,34 @@ const Community = () => {
       }
 
       // Join the group
-      const { error } = await supabase.from('study_group_members').insert([{
+      const { error: insertError } = await supabase.from('study_group_members').insert([{
         group_id: groupId,
         user_id: user.id,
       }]);
 
-      if (error) throw error;
+      if (insertError) throw insertError;
 
-      // Update member count manually
-      const { data: groupData } = await supabase
+      // Get current member count
+      const { data: groupData, error: fetchError } = await supabase
         .from('study_groups')
         .select('member_count')
         .eq('id', groupId)
         .single();
 
-      if (groupData) {
-        await supabase
-          .from('study_groups')
-          .update({ member_count: groupData.member_count + 1 })
-          .eq('id', groupId);
-      }
+      if (fetchError) throw fetchError;
+
+      // Update member count
+      const { error: updateError } = await supabase
+        .from('study_groups')
+        .update({ member_count: (groupData.member_count || 0) + 1 })
+        .eq('id', groupId);
+
+      if (updateError) throw updateError;
 
       toast({ title: "Success", description: "You've joined the study group!" });
-      fetchData();
+      await fetchData();
     } catch (error: any) {
+      console.error('Error joining group:', error);
       toast({ title: "Error", description: error.message, variant: "destructive" });
     }
   };
