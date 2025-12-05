@@ -90,9 +90,12 @@ const Auth = () => {
         description: "Your account has been created. Redirecting...",
       });
     } catch (error: any) {
+      const errorMessage = error.message === "Failed to fetch" 
+        ? "Network error. Please check your internet connection and try again."
+        : error.message;
       toast({
         title: "Sign Up Error",
-        description: error.message,
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -130,9 +133,12 @@ const Auth = () => {
         description: "Successfully signed in.",
       });
     } catch (error: any) {
+      const errorMessage = error.message === "Failed to fetch" 
+        ? "Network error. Please check your internet connection and try again."
+        : error.message;
       toast({
         title: "Sign In Error",
-        description: error.message,
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
